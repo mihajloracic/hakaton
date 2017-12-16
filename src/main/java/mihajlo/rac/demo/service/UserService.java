@@ -26,4 +26,22 @@ public class UserService {
     public User getUserById(Long id){
         return userRepository.getOne(id);
     }
+
+    public User login(String name, String password){
+        User fromUsername = this.userRepository.findByName(name);
+        if(fromUsername != null && fromUsername.getPassword().equals(password)){
+            return fromUsername;
+        }
+        return null;
+    }
+
+    public User register(String name, String email, String password) {
+        User fromUsername = this.userRepository.findByName(name);
+        if(fromUsername == null){
+            User newUser = new User(name, email, password);
+            this.userRepository.save(newUser);
+            return newUser;
+        }
+        return null;
+    }
 }

@@ -9,8 +9,6 @@ public class User {
 
     private String name;
 
-    private String imageUrl;
-
     private String email;
 
     private String password;
@@ -34,14 +32,6 @@ public class User {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -55,6 +45,12 @@ public class User {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
         this.password = password;
     }
 }
