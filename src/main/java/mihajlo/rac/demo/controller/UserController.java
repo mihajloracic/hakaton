@@ -35,6 +35,12 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping(value = "/user")
+    @ResponseBody
+    public User getUser() {
+        return userService.getUsers().get(0);
+    }
+
     @RequestMapping(
             value = "/login",
             method = RequestMethod.POST,
