@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import mihajlo.rac.demo.model.Monument;
+import mihajlo.rac.demo.service.MonumentService;
 import mihajlo.rac.demo.service.StorageService;
+import mihajlo.rac.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +29,13 @@ public class UploadController {
     @Autowired
     StorageService storageService;
 
+
+    @Autowired
+    MonumentService monumentService;
+
+    @Autowired
+    UserService userService;
+
     List<String> files = new ArrayList<String>();
 
     @GetMapping("/")
@@ -35,11 +44,16 @@ public class UploadController {
     }
 
     @PostMapping("/uploadMonument")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("name")String name,@RequestParam("description")String description) {
+    @ResponseBody
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("name")String name,@RequestParam("description")String description,@RequestParam("userId")Long userId) {
         try {
             storageService.store(file);
             files.add(file.getOriginalFilename());
-
+            Monument monument = new Monument();
+            monument.setImageUrl(file.getOriginalFilename());
+            monument.setName(name);
+            monumentService.saveMonument(monument);
+            //TODO dodati ostale stvari koje treba da se dodaju za monument
         } catch (Exception e) {
             e.printStackTrace();
         }
