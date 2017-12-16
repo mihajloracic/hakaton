@@ -27,8 +27,8 @@ public class UserService {
         return userRepository.getOne(id);
     }
 
-    public User login(String name, String password){
-        User fromUsername = this.userRepository.findByName(name);
+    public User login(String email, String password) {
+        User fromUsername = this.userRepository.findByEmail(email);
         if(fromUsername != null && fromUsername.getPassword().equals(password)){
             return fromUsername;
         }
@@ -39,7 +39,12 @@ public class UserService {
         User fromUsername = this.userRepository.findByName(name);
         if(fromUsername == null){
             User newUser = new User(name, email, password);
-            this.userRepository.save(newUser);
+            try {
+                this.userRepository.save(newUser);
+            } catch (Exception e) {
+                return null;
+            }
+
             return newUser;
         }
         return null;

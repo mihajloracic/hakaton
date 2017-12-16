@@ -47,7 +47,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody User user) {
-        User fromUsername = this.userService.login(user.getName(), user.getPassword());
+        User fromUsername = this.userService.login(user.getEmail(), user.getPassword());
         if(fromUsername != null){
             return new ResponseEntity(fromUsername, HttpStatus.OK);
         }

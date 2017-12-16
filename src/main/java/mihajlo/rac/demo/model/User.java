@@ -2,13 +2,16 @@ package mihajlo.rac.demo.model;
 
 import javax.persistence.*;
 @Entity
+@Table(name = "korisnik")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "ime", unique = true, nullable = false)
     private String name;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
