@@ -1,13 +1,19 @@
 package mihajlo.rac.demo.model;
 
 
+import javax.persistence.*;
 
+@Entity
 public class LikeMonument {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Monument monument;
 
     public LikeMonument() {

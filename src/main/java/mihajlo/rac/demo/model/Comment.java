@@ -1,17 +1,23 @@
 package mihajlo.rac.demo.model;
 
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
 public class Comment {
 
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Monument monument;
 
     private String content;

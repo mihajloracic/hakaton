@@ -1,6 +1,8 @@
 package mihajlo.rac.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
 @Table(name = "korisnik")
 public class User {
@@ -15,6 +17,16 @@ public class User {
     private String email;
 
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Monument> monuments;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Comment> comments;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<LikeMonument> likes;
+
 
     public User() {
     }
