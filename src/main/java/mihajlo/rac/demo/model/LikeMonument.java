@@ -2,9 +2,10 @@ package mihajlo.rac.demo.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class LikeMonument {
+public class LikeMonument implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

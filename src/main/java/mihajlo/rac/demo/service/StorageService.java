@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,11 @@ public class StorageService {
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
     private final Path rootLocation = Paths.get("upload-dir");
 
-    public void store(MultipartFile file){
+    public String store(MultipartFile file) {
         try {
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            String imageId = UUID.randomUUID().toString() + ".png";
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(imageId));
+            return imageId;
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }

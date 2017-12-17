@@ -2,11 +2,12 @@ package mihajlo.rac.demo.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-public class Comment {
+public class Comment implements Serializable {
 
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 

@@ -24,4 +24,6 @@ public class MonumentController {
     public List<Monument> getMonuments(){
         return monumentService.getMonuments();
     }
+
+
 }
